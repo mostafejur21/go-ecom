@@ -3,6 +3,8 @@ package config
 import (
 	"fmt"
 	"os"
+
+	"github.com/lpernett/godotenv"
 )
 
 type Config struct {
@@ -14,7 +16,10 @@ type Config struct {
 	DBName     string
 }
 
+var Envs = initConfig()
+
 func initConfig() Config {
+	godotenv.Load()
 	return Config{
 		PublicHost: getEnv("PUBLIC_HOST", "http://localhost"),
 		Port:       getEnv("PORT", "8080"),
